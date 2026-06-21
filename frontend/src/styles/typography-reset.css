@@ -1,0 +1,87 @@
+/* Neutralize Bootstrap Reboot typography on elements */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+ul,
+ol,
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+blockquote {
+  margin: 0;
+}
+
+address {
+  margin: 0;
+  font-style: inherit;
+}
+
+pre {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+figure {
+  margin: 0;
+}
+
+abbr[title] {
+  text-decoration: inherit;
+}
+
+b,
+strong {
+  font-weight: inherit;
+}
+
+small {
+  font-size: inherit;
+}
+
+sub,
+sup {
+  position: static;
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+legend {
+  float: none;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+label {
+  margin: 0;
+}

@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "Involve";
+  font-weight: 400;
+  src: url("./../assets/Involve-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Involve";
+  font-weight: 500;
+  src: url("./../assets/Involve-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Involve";
+  font-weight: 600;
+  src: url("./../assets/Involve-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Involve";
+  font-weight: 700;
+  src: url("./../assets/Involve-Bold.ttf");
+}
+
+.h1 {
+  font-size: 32px;
+  font-family: var(--font-family);
+  font-weight: 700;
+}
+
+.h2 {
+  font-size: 20px;
+  font-family: var(--font-family);
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.b1 {
+  font-size: 20px;
+  font-family: var(--font-family);
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.b2 {
+  font-size: 16px;
+  font-family: var(--font-family);
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.b3 {
+  font-size: 12px;
+  font-family: var(--font-family);
+  font-weight: 600;
+}
+
+.t1 {
+  font-size: 13px;
+  font-family: var(--font-family);
+  font-weight: 500;
+}
+
+.t2 {
+  font-size: 12px;
+  font-family: var(--font-family);
+  font-weight: 500;
+}
