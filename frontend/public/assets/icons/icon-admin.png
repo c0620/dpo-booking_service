@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 52.0005 52.0005" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Sidebar icon">
+<path id="Subtract" d="M26.2912 7.473C36.5233 7.47316 44.8175 15.7683 44.8176 26.0003C44.8176 36.2325 36.5233 44.5275 26.2912 44.5277C16.059 44.5277 7.76386 36.2326 7.76386 26.0003C7.76393 15.7682 16.059 7.473 26.2912 7.473ZM26.2912 16.7377C21.1751 16.7377 17.0275 20.8852 17.0275 26.0013C17.0278 31.1172 21.1752 35.264 26.2912 35.264C31.4071 35.264 35.5546 31.1172 35.5549 26.0013C35.5549 20.8852 31.4073 16.7377 26.2912 16.7377Z" fill="var(--fill-0, white)"/>
+<g id="Repeat group 1">
+<g id="Repeat group 1_inner" data-figma-trr="r7p41.02-0f">
+<path id="Rectangle 25" d="M22.032 2.62123C22.4057 1.56336 23.4057 0.856027 24.5276 0.856027H27.8973C29.0696 0.856027 30.1022 1.62723 30.4351 2.75132L32.6169 10.1196H19.3832L22.032 2.62123Z" fill="var(--fill-0, white)"/>
+</g>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(30.1171 -10.5383) rotate(51.4286)"/>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(57.134 6.43764) rotate(102.857)"/>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(60.7064 38.1446) rotate(154.286)"/>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(38.1442 60.7067) rotate(-154.286)"/>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(6.43728 57.134) rotate(-102.857)"/>
+<use xlink:href="#Repeat%20group%201_inner" transform="translate(-10.5385 30.117) rotate(-51.4286)"/>
+</g>
+</g>
+</svg>
