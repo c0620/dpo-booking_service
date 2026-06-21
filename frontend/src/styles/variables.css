@@ -1,0 +1,22 @@
+:root {
+  --blue-200: #327afe;
+  --black: #000000;
+  --white: #ffffff;
+  --grey-100: #ededed;
+  --grey-200: #c2c2c2;
+  --grey-300: #6e6e6e;
+  --red: #e53935;
+  --border-radius-l: 40px;
+  --border-radius-m: 24px;
+  --padding-s: 16px;
+  --padding-m: 20px;
+  --padding-l: 32px;
+  --padding-xl: 48px;
+  --padding-xxl: 64px;
+  --margin-s: 8px;
+  --margin-m: 12px;
+  --margin-l: 24px;
+  --font-family: "Involve", "Segoe UI", system-ui, sans-serif;
+  --panel-height: 840px;
+  --panel-width: 840px;
+}

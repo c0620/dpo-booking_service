@@ -1,0 +1,1230 @@
+@import "./variables.css";
+@import "./typography-reset.css";
+@import "./fonts.css";
+@import "./utilities.css";
+@import "react-datepicker/dist/react-datepicker.css";
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--grey-100);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  background: var(--grey-100);
+  position: relative;
+}
+
+.side-menu {
+  width: 176px;
+  flex-shrink: 0;
+  background: var(--black);
+  border-radius: 0 var(--border-radius-l) var(--border-radius-l) 0;
+  padding: var(--padding-xl) var(--padding-l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-l);
+  align-self: center;
+  position: relative;
+  z-index: 20;
+}
+
+.btn-date-picker {
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  border: none;
+}
+
+.btn-date-picker-active {
+  color: var(--white);
+  background-color: var(--blue-200);
+  border-radius: var(--border-radius-m);
+  border: none;
+}
+
+.menu-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grey-300);
+  color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-btn.active {
+  background: var(--blue-200);
+}
+
+.menu-btn img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  padding: 32px 40px 32px 24px;
+  gap: 24px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.main-area.start-page {
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: visible;
+  flex: 1;
+  min-height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.main-area.profile-page,
+.main-area.history-page,
+.main-area.admin-page {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 48px;
+}
+
+.map-background {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: auto;
+}
+
+.map-zoom-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.map-zoom-content {
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.floor-map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.floor-map-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.start-page .control-panel.start-page-panel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
+  bottom: 32px;
+  z-index: 10;
+  width: clamp(340px, 40vw, var(--panel-width));
+  max-height: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  pointer-events: auto;
+}
+
+.start-page .control-panel.start-page-panel {
+  border-radius: var(--border-radius-l);
+}
+
+.control-panel {
+  width: 100%;
+  min-width: 0;
+  background: var(--black);
+  border-radius: var(--border-radius-l) 0 0 var(--border-radius-l);
+  padding: 28px 32px;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-l);
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: min(var(--panel-height), calc(100vh - 64px));
+}
+
+.profile-page .control-panel,
+.admin-page .control-panel,
+.history-page .control-panel {
+  width: 100%;
+  border-radius: var(--border-radius-l);
+}
+
+.panel-title {
+  margin: 0;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.panel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Кнопка закрытия панели и затемнение — только на не-десктопе */
+.panel-close-mobile {
+  display: none;
+}
+
+.start-panel-backdrop {
+  display: none;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--margin-l);
+  min-height: 100%;
+  min-width: 0;
+}
+
+.btn-primary-custom {
+  background: var(--blue-200);
+  border: none;
+  color: var(--white);
+  border-radius: 12px;
+  padding: 4px 16px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-primary-custom:hover {
+  filter: brightness(1.1);
+}
+
+.btn-primary-custom:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 20px;
+  padding: 4px 16px;
+}
+
+.btn-danger-custom {
+  background: var(--red);
+  border: none;
+  color: var(--white);
+  border-radius: 12px;
+  padding: 4px 16px;
+  cursor: pointer;
+}
+
+.btn-outline-custom {
+  background: transparent;
+  border: 1px solid var(--white);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 4px 16px;
+  cursor: pointer;
+}
+
+.profile-form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+
+.room-card-large,
+.room-card-small {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  color: var(--black);
+  max-width: 100%;
+}
+
+.room-card-large {
+  display: flex;
+  height: 378px;
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.room-card-large--compact {
+  height: 40%;
+}
+
+.room-card-large .room-image-wrap {
+  flex: 0 0 59.6%;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.room-card-large .room-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-card-large .room-info {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.room-card-large .room-info-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.room-card-large .room-card-action {
+  flex-shrink: 0;
+  margin-top: 12px;
+  align-self: stretch;
+  width: 100%;
+  min-height: 32px;
+  height: auto;
+  padding: 8px 16px;
+  line-height: 1.25;
+  white-space: normal;
+  text-align: center;
+}
+
+.room-card-small {
+  width: 100%;
+  min-height: 234px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.room-card-small .body {
+  flex: 1;
+}
+
+.room-card-small .body .btn-primary-custom {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.room-card-small .thumb {
+  height: 50%;
+  overflow: hidden;
+}
+
+.room-card-small .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-card-small .body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 4px 12px;
+}
+
+.tag img {
+  width: 11px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.room-card-title {
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-card-desc {
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.room-card-large--compact .room-card-desc {
+  -webkit-line-clamp: 2;
+}
+
+.room-card-desc--extra {
+  -webkit-line-clamp: 2;
+}
+
+.amenity-tag {
+  display: inline-flex;
+  border: 1px solid var(--grey-200);
+  background-color: var(--grey-100);
+  color: var(--grey-300);
+  border-radius: 12px;
+  padding: 4px 12px;
+  margin: 0 4px 4px 0;
+}
+
+.small-cards-row {
+  display: flex;
+  gap: 24px;
+  min-width: 0;
+}
+
+.form-field label {
+  display: block;
+}
+
+.form-field .hint {
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.form-field input {
+  width: 100%;
+  height: 44px;
+  border-radius: var(--border-radius-m);
+  border: none;
+  padding: 0 20px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.form-field input[readonly] {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 389px 1fr;
+  gap: 48px;
+  min-width: 0;
+  height: 100%;
+}
+
+.notification-card {
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  padding: 16px 20px;
+}
+
+.notification-card .meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.booking-card {
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.user-card > div:first-child,
+.booking-card > div:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.main-area.history-page.is-overflow {
+  padding-right: 0;
+}
+
+.history-page.is-overflow .control-panel {
+  border-radius: var(--border-radius-l) 0 0 var(--border-radius-l);
+}
+
+.history-cards {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.history-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.history-booking-card {
+  flex: 0 0 33%;
+  width: 33%;
+  height: 100%;
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-booking-card .card-image {
+  height: 220px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.history-booking-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.history-booking-card .card-body {
+  flex: 1;
+  min-height: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-booking-card .card-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-booking-card .card-tags {
+  margin-bottom: 4px;
+}
+
+.history-booking-card.is-cancelled .card-image {
+  opacity: 0.5;
+}
+
+.history-booking-card.is-cancelled .room-card-title,
+.history-booking-card.is-cancelled .room-card-desc {
+  color: var(--grey-300);
+}
+
+.tag--blue {
+  background: var(--blue-200);
+}
+
+.tag--muted {
+  background: var(--grey-300);
+}
+
+.history-cancel-btn {
+  flex-shrink: 0;
+  width: 100%;
+  border: none;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.history-cancel-btn:hover {
+  filter: brightness(1.05);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 389px) 1fr;
+  gap: 48px;
+  min-width: 0;
+}
+
+.user-card {
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.user-card .actions {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.room-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.room-tab {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-tab.active {
+  background: var(--blue-200);
+  color: var(--white);
+}
+
+.admin-btn-dark {
+  color: var(--black) !important;
+  border-color: var(--black) !important;
+}
+
+.bookings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 12px;
+}
+
+.time-range-slider {
+  margin-top: 20px;
+  padding-top: 88px;
+}
+
+.time-range-track-wrap {
+  position: relative;
+  height: 40px;
+}
+
+.time-range-callout {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-m);
+  color: var(--white);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.time-range-callout.is-free {
+  background: var(--blue-200);
+}
+
+.time-range-callout.is-busy {
+  background: var(--grey-300);
+}
+
+.time-range-callout .h2,
+.time-range-callout .t1 {
+  color: var(--white);
+}
+
+.time-range-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 16px;
+  height: 8px;
+  background: var(--grey-300);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.time-range-own {
+  position: absolute;
+  top: 8px;
+  height: 24px;
+  background: rgba(50, 122, 254, 0.35);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.time-range-busy {
+  position: absolute;
+  top: 16px;
+  height: 8px;
+  background: var(--grey-200);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.time-range-selection {
+  position: absolute;
+  top: 16px;
+  height: 8px;
+  background: var(--blue-200);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.time-range-selection.is-conflict {
+  background: var(--grey-200);
+}
+
+.time-range-input {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.time-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--blue-200);
+  border: 2px solid var(--white);
+  cursor: pointer;
+  pointer-events: auto;
+  margin-top: -5px;
+}
+
+.time-range-track-wrap.is-conflict .time-range-input::-webkit-slider-thumb,
+.time-range-track-wrap.is-conflict .time-range-input::-moz-range-thumb {
+  background: var(--grey-300);
+}
+
+.time-range-input::-webkit-slider-runnable-track {
+  height: 8px;
+  background: transparent;
+}
+
+.time-range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--blue-200);
+  border: 2px solid var(--white);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.time-range-input::-moz-range-track {
+  height: 8px;
+  background: transparent;
+}
+
+.time-range-input--end {
+  z-index: 4;
+}
+
+.time-range-input--start {
+  z-index: 3;
+}
+
+.booking-message {
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.booking-message--error {
+  background: rgba(255, 80, 80, 0.15);
+  color: #ff8a8a;
+}
+
+.booking-message--success {
+  background: rgba(50, 122, 254, 0.2);
+  color: #9ec0ff;
+}
+
+.booking-controls {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.booking-controls-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.date-picker-row {
+  width: 100%;
+  min-width: 0;
+}
+
+.date-picker-days {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.active-booking-card {
+  flex: 0 0 190px;
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: center;
+}
+
+.active-booking-clock {
+  width: 28px;
+  height: 28px;
+  filter: invert(1);
+}
+
+.active-booking-card .btn-danger-custom {
+  width: 100%;
+}
+
+/* ============================================================
+   Responsive / адаптивная вёрстка
+   ============================================================ */
+
+/* --- Планшеты и небольшие ноутбуки --- */
+@media (max-width: 1200px) {
+  /* Стартовая страница: карта на весь экран,
+     панель появляется поверх неё как шторка снизу при выборе комнаты */
+  .start-page .control-panel.start-page-panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    transform: translateY(100%);
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+    transition: transform 0.3s ease;
+    z-index: 110;
+    visibility: hidden;
+  }
+  .start-page.panel-open .control-panel.start-page-panel {
+    transform: translateY(0);
+    visibility: visible;
+  }
+  /* Поднимаем контекст наложения выше нижнего меню,
+     иначе шторка и кнопка брони уходят под панель навигации */
+  .main-area.start-page.panel-open {
+    z-index: 120;
+  }
+
+  /* Затемнение карты под шторкой */
+  .start-page.panel-open .start-panel-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    pointer-events: auto;
+  }
+
+  /* Кнопка закрытия шторки */
+  .panel-close-mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--white);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+  }
+
+  .control-panel {
+    max-width: 100%;
+    border-radius: var(--border-radius-l);
+    max-height: none;
+  }
+
+  /* Профиль / Админка: естественный поток документа */
+  .main-area.profile-page,
+  .main-area.admin-page {
+    align-items: flex-start;
+    padding: 24px;
+  }
+  .profile-page .control-panel,
+  .admin-page .control-panel {
+    height: auto;
+  }
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .admin-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* --- Планшеты в портретной ориентации --- */
+@media (max-width: 900px) {
+  .control-panel {
+    padding: 24px;
+    gap: var(--margin-m);
+  }
+
+  /* Большая карточка комнаты — в столбец */
+  .room-card-large,
+  .room-card-large--compact {
+    flex-direction: column;
+    height: auto;
+  }
+  .room-card-large .room-image-wrap {
+    flex: 0 0 200px;
+    width: 100%;
+  }
+  .room-card-large--compact .room-card-desc {
+    -webkit-line-clamp: 3;
+  }
+
+  /* Сетка бронирований в админке — один столбец */
+  .bookings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Блок бронирования (активная бронь + контролы) — в столбец */
+  .booking-controls {
+    flex-direction: column;
+  }
+  .active-booking-card {
+    flex: 0 0 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .active-booking-card .btn-danger-custom {
+    width: auto;
+  }
+
+  /* История — вертикальный список вместо горизонтального скролла */
+  .main-area.history-page {
+    align-items: flex-start;
+    padding: 24px;
+  }
+  .main-area.history-page.is-overflow {
+    padding: 24px;
+  }
+  .history-page .control-panel,
+  .history-page.is-overflow .control-panel {
+    height: auto;
+    border-radius: var(--border-radius-l);
+  }
+  .history-cards {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  .history-booking-card {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+  }
+  .history-booking-card .card-content {
+    overflow: visible;
+  }
+}
+
+/* --- Мобильные устройства: меню в нижнюю панель --- */
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+  .side-menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-self: auto;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.2);
+  }
+  .menu-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+  }
+  .menu-btn img {
+    width: 28px;
+    height: 28px;
+  }
+  .side-menu .profile-btn {
+    font-size: 20px;
+  }
+
+  /* Запас снизу под фиксированную панель навигации */
+  .main-area {
+    padding-bottom: 88px;
+  }
+  .main-area.start-page {
+    padding-bottom: 0;
+  }
+}
+
+/* --- Телефоны --- */
+@media (max-width: 600px) {
+  .h1 {
+    font-size: 24px;
+  }
+  .h2,
+  .b1 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .main-area.profile-page,
+  .main-area.admin-page,
+  .main-area.history-page,
+  .main-area.history-page.is-overflow {
+    padding: 16px 16px 88px;
+  }
+  .control-panel {
+    padding: 20px 16px;
+    border-radius: var(--border-radius-m);
+  }
+  .start-page .control-panel.start-page-panel {
+    border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
+  }
+
+  .small-cards-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Даты бронирования — в столбец, во всю ширину */
+  .date-picker-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .date-picker-days {
+    width: 100%;
+    flex-direction: column;
+  }
+  .date-picker-days > button {
+    width: 100%;
+  }
+
+  .room-tab {
+    max-width: 140px;
+  }
+
+  /* Заголовок + селект в админке переносятся на узких экранах */
+  .admin-grid .d-flex.justify-content-between {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Карточки пользователей и бронирований — вертикальные, без переполнения */
+  .user-card,
+  .booking-card {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .user-card .actions {
+    margin-left: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .user-card .actions button {
+    flex: 1 1 auto;
+  }
+  .booking-card .btn-danger-custom {
+    width: 100%;
+  }
+
+  /* Модальные окна */
+  .modal-overlay {
+    padding: 16px;
+  }
+  .modal-dialog {
+    padding: 0;
+  }
+  .modal-header {
+    padding: 16px 16px 0;
+  }
+  .modal-body {
+    padding: 12px 16px;
+  }
+  .modal-footer {
+    padding: 0 16px 16px;
+    flex-direction: column;
+  }
+  .modal-close {
+    font-size: 32px;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 48px;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 800px;
+  padding: 32px 48px;
+  background: var(--white);
+  color: var(--black);
+  border-radius: var(--border-radius-m);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 20px 0;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  color: var(--black);
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  font-size: 48px;
+}
+
+.modal-body {
+  padding: 16px 20px;
+}
+
+.modal-body p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modal-textarea {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--grey-200);
+  padding: 12px;
+  font-family: var(--font-family);
+  resize: vertical;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 20px 20px;
+}
+
+.modal-footer > button {
+  width: 100%;
+}
